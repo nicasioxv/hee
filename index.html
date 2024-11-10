@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จับผู้ต้องหา 20 คน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .criminal-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .criminal-card:hover {
+            transform: scale(1.05);
+        }
+        .criminal-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .criminal-card h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .criminal-card p {
+            font-size: 16px;
+            color: #666;
+        }
+        .status {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 10px;
+        }
+        .arrest-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .arrest-btn:hover {
+            background-color: #0056b3;
+        }
+        .arrest-btn:disabled {
+            background-color: #dc3545;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>รายชื่อผู้ต้องหา (20 คน)</h1>
+
+    <div class="container">
+        <!-- ตัวอย่างของผู้ต้องหา -->
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305202554296209438/8C0C5C7E-BF75-4F84-ADC1-5C25FDF08DAA.jpg?ex=67322c1a&is=6730da9a&hm=2531c409e18a97aebc487b7656009cee34545a12f7a580c501034166a287f321&300x250" alt="ผู้ต้องหาคนที่ 1">
+            <h3>ดรีม</h3>
+            <p>อาชญากรรม: ปล้นธนาคาร</p>
+            <p class="status" id="status-1">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-1" onclick="arrestCriminal(1)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192131710943252/92272325-7D33-4834-9A50-67F25AAA9745.jpg?ex=67322265&is=6730d0e5&hm=602bd2b10ee23f6965b03db35d043e1fe25c6beb715cf38477e50ce3fb6da636&300x250" alt="ผู้ต้องหาคนที่ 2">
+            <h3>ซีซาร์</h3>
+            <p>อาชญากรรม: ขโมยรถ</p>
+            <p class="status" id="status-2">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-2" onclick="arrestCriminal(2)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305199600730378270/2BD0043B-995F-4152-8BC3-915EEFB4F758.jpg?ex=6732295a&is=6730d7da&hm=9e35ac80914232fe859d9cadee4d6a0f5f45050694143a2cfda2109b5ac01b8f&300x250" alt="ผู้ต้องหาคนที่ 3">
+            <h3>นิบ</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-3">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-3" onclick="arrestCriminal(3)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1106241536263463053/1305201199187759175/IMG_8925.jpg?ex=67322ad7&is=6730d957&hm=001ce26af3da4ad8822edccd6c2d30122eb529f36009d2a344b15204ce9b936c&300x250" alt="ผู้ต้องหาคนที่ 4">
+            <h3>ไดม่อน</h3>
+            <p>อาชญากรรม: ฆ่าคนตาย</p>
+            <p class="status" id="status-4">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-4" onclick="arrestCriminal(4)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192129500283045/22BFCF1C-0153-459E-A644-A75CA44DE2AF.jpg?ex=67322264&is=6730d0e4&hm=40bba6eb0fe5ab2a5bd932d2686f2972ffbfa0c4e2f35c6282975cfb7e59ed6b&300x250" alt="ผู้ต้องหาคนที่ 5">
+            <h3>พอดี</h3>
+            <p>อาชญากรรม: ปล้นร้านทอง</p>
+            <p class="status" id="status-5">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-5" onclick="arrestCriminal(5)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192131987636314/14FA5327-49D2-4B3F-B078-BA499B74E9EF.jpg?ex=67322265&is=6730d0e5&hm=cd5c0d3add628cf5b86fa77da0fe641a1dde908fba73f0dd83b9d3bce09cfaf9&300x250" alt="ผู้ต้องหาคนที่ 6">
+            <h3>อลีฟ</h3>
+            <p>อาชญากรรม: ลักทรัพย์</p>
+            <p class="status" id="status-6">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-6" onclick="arrestCriminal(6)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305198504670662736/IMG_2836.png?ex=67322854&is=6730d6d4&hm=e3a98cc3edffee3c5777c0ef8d6ca5ddecc51ae9cb294f57e7dcf21531106c2a&300x250" alt="ผู้ต้องหาคนที่ 7">
+            <h3>เมธ</h3>
+            <p>อาชญากรรม: ทุจริตการเงิน</p>
+            <p class="status" id="status-7">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-7" onclick="arrestCriminal(7)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192130800521318/IMG_3322.jpg?ex=67322265&is=6730d0e5&hm=0d75c5ba46f201a28cb6cf49b65c5ce9f51f5e0dc2dbb9b05a29d630fd4a600f&300x250" alt="ผู้ต้องหาคนที่ 8">
+            <h3>ภูรี</h3>
+            <p>อาชญากรรม: ข่มขืน</p>
+            <p class="status" id="status-8">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-8" onclick="arrestCriminal(8)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305199601074307082/ED6ACAEA-97B2-4A07-B570-A0FC5B0E37D0.jpg?ex=6732295a&is=6730d7da&hm=bf84df797a5d7ca3b1561619905f97d1e5b5adbadc6d5f2ce636d667e7a9c8a0&300x250" alt="ผู้ต้องหาคนที่ 9">
+            <h3>เทนส์</h3>
+            <p>อาชญากรรม: ค้าอาวุธเถื่อน</p>
+            <p class="status" id="status-9">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-9" onclick="arrestCriminal(9)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1106241536263463053/1305199667914735757/IMG_3601.png?ex=6732296a&is=6730d7ea&hm=88d643b731fdc09bf573660a075525a02df69bce7f5cf0929699cf2b3f112de2&300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>เนเน่</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-10">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-10" onclick="arrestCriminal(10)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305202074425884712/36028F54-16BC-4215-9017-E68E6BF044C0.jpg?ex=67322ba8&is=6730da28&hm=8aadad8621edd8fd779a78b75ce35e7f709d87a2db02ca0681f44fab24214f87&300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>แต๊งกิ้ว</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-25">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-25" onclick="arrestCriminal(25)">จับผู้ต้องหา</button>
+        </div>
+
+    
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305201881605210203/EBFC5539-1DBD-44C4-B05E-E5D96CE16509.jpg?ex=67322b7a&is=6730d9fa&hm=7dd8348487ff002f8e9f330655e446db021255fe1addec30ee278702189caeed&300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>ต้า</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-24">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-24" onclick="arrestCriminal(23)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192132662788096/39655E2E-5519-44EF-9309-5C0919BED2D3.jpg?ex=67322265&is=6730d0e5&hm=af59fc22b3dff3283fc3b4dbc4e91dc8794d8915844cc0036840d53dd7adcefd&300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>นนท์</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-23">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-23" onclick="arrestCriminal(23)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305192132331700315/171B1A13-9196-4FC8-B063-ACFF35DD5818.jpg?ex=67322265&is=6730d0e5&hm=ff77c3379701c3a9023fe617de690bbe99bd4efa13cd95069755274eecf46b05&300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>โฟวิว</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-22">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-22" onclick="arrestCriminal(22)">จับผู้ต้องหา</button>
+        </div>
+
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1305198489386487908/D61AC75B-6688-4BD2-8845-35526B25E80E.jpg?ex=67322851&is=6730d6d1&hm=67658b00bb49b58eabba6912bb4bc62779cf3640312c4f6a0bde080b248cfeae&/300x250" alt="ผู้ต้องหาคนที่ 10">
+            <h3>สมาท</h3>
+            <p>อาชญากรรม: ค้ายาเสพติด</p>
+            <p class="status" id="status-21">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-21" onclick="arrestCriminal(21)">จับผู้ต้องหา</button>
+        </div>
+
+        
+
+        <!-- เพิ่มผู้ต้องหาที่เหลือจนถึง 20 คน -->
+        <!-- รายการต่อไปนี้จะทำตามรูปแบบข้างต้นสำหรับผู้ต้องหาคนที่ 11-20 -->
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1138113868221132822/1158769098008842270/DDF303D7-84A5-4A65-8849-6E10B7AD1E21.jpg?ex=67321151&is=6730bfd1&hm=124b482fdb72ac6025789436e753ddc9c575e19b7f5a2eeafe1d3094195ef016&300x250" alt="ผู้ต้องหาคนที่ 11">
+            <h3>เพื่นเกลอ</h3>
+            <p>อาชญากรรม: ลักทรัพย์</p>
+            <p class="status" id="status-11">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-11" onclick="arrestCriminal(11)">จับผู้ต้องหา</button>
+        </div>
+
+        <!-- เพิ่มไปจนถึง 20 คน -->
+        <!-- ตัวอย่างเช่น -->
+        <div class="criminal-card">
+            <img src="https://cdn.discordapp.com/attachments/1030352488232140894/1305188272414265455/Screenshot_2024-10-27_012312.png?ex=67321ecd&is=6730cd4d&hm=d42823845ef17860438d89a8d58cc2ed5ce167c90445fed010a87791f211308c&300x250" alt="ผู้ต้องหาคนที่ 20">
+            <h3>ซัน</h3>
+            <p>อาชญากรรม: ปลอมแปลงเอกสาร</p>
+            <p class="status" id="status-20">สถานะ: ยังไม่ถูกจับ</p>
+            <button class="arrest-btn" id="btn-20" onclick="arrestCriminal(20)">จับผู้ต้องหา</button>
+        </div>
+    </div>
+
+
+
+    
+    <script>
+        function arrestCriminal(id) {
+            // เปลี่ยนสถานะให้เป็น "ถูกจับแล้ว"
+            document.getElementById("status-" + id).innerText = "สถานะ: ถูกจับแล้ว";
+            // เปลี่ยนสีของปุ่มให้เป็นสีแดงและทำให้ปุ่มไม่สามารถกดได้
+            var btn = document.getElementById("btn-" + id);
+            btn.style.backgroundColor = "#dc3545";
+            btn.innerText = "จับแล้ว";
+            btn.disabled = true;
+        }
+    </script>
+
+</body>
+</html>
